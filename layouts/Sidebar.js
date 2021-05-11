@@ -186,7 +186,7 @@ export default function Sidebar() {
     ],
   });
   return (
-    <div className="w-62 bg-indigo-900 text-white px-4 py-4 h-screen">
+    <div className="w-72 bg-indigo-900 text-white px-4 py-4 h-screen">
       <ul>
         <li className="mb-4 text-center text-lg  pb-4 border-b border-indigo-300 ">
           Apotek
@@ -196,10 +196,12 @@ export default function Sidebar() {
             return (
               <li
                 key={item.id}
-                className="text-sm mb-2 flex gap-2 items-center cursor-pointer  "
+                className="mb-2 flex gap-2 items-center cursor-pointer  "
               >
                 <div>{item.icon}</div>
-                <div className="w-full px-2 py-2 rounded-sm">{item.name}</div>
+                <div className="text-sm  w-full px-2 py-2 rounded-lg hover:bg-indigo-700">
+                  {item.name}
+                </div>
               </li>
             );
           })}
@@ -221,7 +223,9 @@ export default function Sidebar() {
               />
             </svg>
           </div>
-          <div>Logout</div>
+          <div className="text-sm w-full px-2 py-2 rounded-lg hover:bg-indigo-700">
+            Logout
+          </div>
         </li>
       </ul>
     </div>

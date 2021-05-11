@@ -1,6 +1,6 @@
 import "../styles/globals.css";
 import "tailwindcss/tailwind.css";
-import Default from "../layouts/Default";
+import Topbar from "../layouts/Topbar";
 import Head from "next/head";
 import Sidebar from "../layouts/Sidebar";
 function MyApp({ Component, pageProps }) {
@@ -13,7 +13,10 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <div className="containerDefault flex">
         <Sidebar />
-        <Component {...pageProps} />
+        <div className="w-full">
+          <Topbar />
+          <Component {...pageProps} />
+        </div>
       </div>
     </div>
   );
