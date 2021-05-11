@@ -3,7 +3,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 export default function Sidebar() {
   const router = useRouter();
-  console.log(router);
   const [lists, setLists] = React.useState({
     lists: [
       {
@@ -26,6 +25,27 @@ export default function Sidebar() {
           </svg>
         ),
         link: "/daftar-obat",
+      },
+      {
+        id: "10",
+        name: "Supplier",
+        icon: (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M4 6h16M4 10h16M4 14h16M4 18h16"
+            />
+          </svg>
+        ),
+        link: "/daftar-supplier",
       },
       {
         id: "2",
