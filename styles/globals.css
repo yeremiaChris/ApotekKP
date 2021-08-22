@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 body {
-  @apply bg-blue-50;
+  @apply bg-base-bg;
 }
 
 * {
   font-size: 16px;
 }
 .containerDefault {
-  width: 1400px;
+  width: 1200px;
   margin: auto;
 }

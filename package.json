@@ -9,9 +9,16 @@
   },
   "dependencies": {
     "@tailwindcss/forms": "^0.3.2",
+    "express": "^4.17.1",
+    "mongoose": "^5.13.7",
     "next": "10.2.0",
+    "next-redux-wrapper": "^7.0.2",
+    "nodemon": "^2.0.12",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-redux": "^7.2.4",
+    "redux": "^4.1.1",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.2.5",

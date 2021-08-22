@@ -24,7 +24,7 @@ export default function Sidebar() {
             />
           </svg>
         ),
-        link: "/daftar-obat",
+        link: "/",
       },
       {
         id: "10",
@@ -231,8 +231,16 @@ export default function Sidebar() {
                   <a className="mb-2 flex gap-2 items-center cursor-pointer  ">
                     <div>{item.icon}</div>
                     <div
-                      className={`text-sm  w-full px-2 py-2 rounded-lg hover:bg-indigo-700 ${
-                        router.pathname === item.link ? "bg-indigo-700" : ""
+                      className={`text-sm  w-full px-2 py-2 rounded-lg hover:bg-indigo-700  ${
+                        item.name === "Daftar"
+                          ? router.pathname === item.link ||
+                            router.pathname === "/tambah"
+                            ? "bg-indigo-700"
+                            : null
+                          : router.pathname !== "/" &&
+                            router.pathname.includes(item.link)
+                          ? "bg-indigo-700"
+                          : null
                       }`}
                     >
                       {item.name}
