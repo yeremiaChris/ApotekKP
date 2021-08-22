@@ -8,7 +8,7 @@ module.exports.medicine_get = (req, res, next) => {
             res.status(400).send(err);
             next();
           } else {
-            res.status(201).send({ success: "Success", data: data });
+            res.status(201).send({ message: "Success", data: data });
           }
         })
         .sort({ createdAt: -1 });
