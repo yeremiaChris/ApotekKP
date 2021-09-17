@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const autoIncrement = require("mongoose-auto-increment");
+
 const Schema = mongoose.Schema;
 const medicineSchema = new Schema(
   {
@@ -25,6 +27,7 @@ const medicineSchema = new Schema(
   },
   { timestamps: true }
 );
-
+autoIncrement.initialize(mongoose.connection);
+medicineSchema.plugin(autoIncrement.plugin, "medicine");
 const medicine = mongoose.model("medicine", medicineSchema);
 module.exports = medicine;
