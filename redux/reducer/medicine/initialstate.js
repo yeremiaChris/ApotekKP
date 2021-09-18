@@ -8,12 +8,12 @@ export const initialstate = {
     },
     {
       name: "Jenis",
-      value: "1",
+      value: "Tablet",
       error: "",
     },
     {
       name: "Satuan",
-      value: "1",
+      value: "kg",
       error: "",
     },
     {

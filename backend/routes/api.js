@@ -4,6 +4,7 @@ const medicineController = require("../controller/medicineController");
 
 // medicine api
 router.get("/medicine", medicineController.medicine_get);
+router.get("/medicine/:id", medicineController.medicine_get_detail);
 router.post("/medicine", medicineController.medicine_post);
 router.delete("/medicine/:id", medicineController.medicine_delete);
 router.put("/medicine/:id", medicineController.medicine_put);

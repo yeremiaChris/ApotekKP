@@ -1,7 +1,16 @@
 // medicine
 export const GET_MEDICINE = "GET_MEDICINE";
+export const GET_MEDICINE_DETAIL = "GET_MEDICINE_DETAIL";
+export const EMPTY_FORM = "EMPTY_FORM";
 
 // medicine form
 export const ON_BLUR_MEDICINE = "ON_BLUR_MEDICINE";
 export const ON_CHANGE_MEDICINE = "ON_CHANGE_MEDICINE";
+export const SUBMIT_MEDICINE_POST = "SUBMIT_MEDICINE_POST";
+export const SUBMIT_MEDICINE_PUT = "SUBMIT_MEDICINE_PUT";
+export const DELETE_MEDICINE = "DELETE_MEDICINE";
 export const SUBMIT_ERROR = "SUBMIT_ERROR";
+
+// sistem
+export const DISABLED_TRUE = "DISABLED_TRUE";
+export const DISABLED_FALSE = "DISABLED_FALSE";

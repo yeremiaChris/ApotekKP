@@ -13,3 +13,10 @@ body {
   width: 1200px;
   margin: auto;
 }
+
+#btn-submit:disabled {
+  @apply bg-light-gray;
+  @apply border-light-gray;
+  @apply text-disable-btn;
+  @apply cursor-not-allowed;
+}

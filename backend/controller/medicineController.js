@@ -30,7 +30,7 @@ module.exports.medicine_post = (req, res, next) => {
 module.exports.medicine_put = (req, res, next) => {
   const { body } = req;
   const { id } = req.params;
-  medicine.findByIdAndUpdate(id, body, (err, data) => {
+  medicine.findByIdAndUpdate(id, body, { new: true }, (err, data) => {
     if (err) {
       res.status(400).send(err);
       next();
@@ -49,6 +49,21 @@ module.exports.medicine_delete = (req, res, next) => {
       data.remove(() => {
         res.status(201).send(data);
       });
+    } else {
+      res.status(400).send("Not found");
+      next();
+    }
+  });
+};
+
+module.exports.medicine_get_detail = (req, res, next) => {
+  const { id } = req.params;
+  medicine.findById(id, (err, data) => {
+    if (err) {
+      res.status(400).send(err);
+      next();
+    } else if (data) {
+      res.status(201).send(data);
     } else {
       res.status(400).send("Not found");
       next();

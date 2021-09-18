@@ -1,16 +1,18 @@
 import Link from "next/link";
 import { useSelector } from "react-redux";
-import { onBlur, onChange, emptyForm, submitError, submitMedicinePost } from "../redux/actions/medicine/medicineActions";
+import { onBlur, onChange, getDataDetail, submitError, submitMedicinePut } from "../../redux/actions/medicine/medicineActions";
 import { useDispatch } from "react-redux";
-import ErrorMessage from "../components/form/ErrorMessage";
+import ErrorMessage from "../../components/form/ErrorMessage";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-export default function Tambah() {
-  // hooks
+
+export default function Edit() {
+  //  hooks
   const dispatch = useDispatch();
   const router = useRouter();
+
   useEffect(() => {
-    dispatch(emptyForm());
+    dispatch(getDataDetail(router.query.id));
   }, []);
 
   // data
@@ -25,16 +27,15 @@ export default function Tambah() {
   const handleChange = (data) => {
     dispatch(onChange(data));
   };
-
   const submit = () => {
     const error = forms.some((el) => !el.value);
     if (error) dispatch(submitError());
-    if (!error) dispatch(submitMedicinePost(router));
+    if (!error) dispatch(submitMedicinePut(router));
   };
 
   return (
     <div className="py-2 pl-4">
-      <h1 className="text-xl">Tambah Obat</h1>
+      <h1 className="text-xl">Edit Obat</h1>
       <div className="bg-white rounded shadow mt-2 px-4 py-4">
         <div className=" grid grid-cols-2 gap-4">
           {/* nama */}
