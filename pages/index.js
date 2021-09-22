@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { getData, deleteDataMedicine } from "../redux/actions/medicine/medicineActions";
 import { useEffect } from "react";
 
-export default function DaftarObat({ posts }) {
+export default function DaftarObat() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getData());

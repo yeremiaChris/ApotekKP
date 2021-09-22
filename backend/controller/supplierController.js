@@ -1,6 +1,9 @@
-const medicine = require("../model/medicineModel");
-module.exports.medicine_get = (req, res, next) => {
-  medicine
+const supplier = require("../model/supplierModel");
+const fs = require("fs");
+const path = require("path");
+
+module.exports.supplier_get = (req, res, next) => {
+  supplier
     .find({}, (err, data) => {
       if (err) {
         res.status(400).send(err);
@@ -12,9 +15,16 @@ module.exports.medicine_get = (req, res, next) => {
     .sort({ createdAt: -1 });
 };
 
-module.exports.medicine_post = (req, res, next) => {
-  const { body } = req;
-  medicine.create(body, (err, data) => {
+module.exports.supplier_post = (req, res, next) => {
+  console.log(req.body.image);
+  const obj = {
+    name: req.body.name,
+    image: {
+      data: fs.readFileSync(path.join(__dirname + "/uploads/" + "coba")),
+      contentType: "image/png",
+    },
+  };
+  supplier.create(obj, (err, data) => {
     if (err) {
       res.status(400).send(err);
       next();
@@ -23,10 +33,10 @@ module.exports.medicine_post = (req, res, next) => {
   });
 };
 
-module.exports.medicine_put = (req, res, next) => {
+module.exports.supplier_put = (req, res, next) => {
   const { body } = req;
   const { id } = req.params;
-  medicine.findByIdAndUpdate(id, body, { new: true }, (err, data) => {
+  supplier.findByIdAndUpdate(id, body, { new: true }, (err, data) => {
     if (err) {
       res.status(400).send(err);
       next();
@@ -35,9 +45,9 @@ module.exports.medicine_put = (req, res, next) => {
   });
 };
 
-module.exports.medicine_delete = (req, res, next) => {
+module.exports.supplier_delete = (req, res, next) => {
   const { id } = req.params;
-  medicine.findById(id, (err, data) => {
+  supplier.findById(id, (err, data) => {
     if (err) {
       res.status(400).send(err);
       next();
@@ -52,9 +62,9 @@ module.exports.medicine_delete = (req, res, next) => {
   });
 };
 
-module.exports.medicine_get_detail = (req, res, next) => {
+module.exports.supplier_get_detail = (req, res, next) => {
   const { id } = req.params;
-  medicine.findById(id, (err, data) => {
+  supplier.findById(id, (err, data) => {
     if (err) {
       res.status(400).send(err);
       next();
