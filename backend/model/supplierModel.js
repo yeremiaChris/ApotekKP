@@ -12,6 +12,11 @@ const supplierSchema = new Schema(
       data: Buffer,
       contentType: String,
     },
+    media: {
+      defaultImage: {
+        type: String,
+      },
+    },
   },
   { timestamps: true }
 );

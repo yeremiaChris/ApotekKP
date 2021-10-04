@@ -12,16 +12,22 @@ module.exports.supplier_get = (req, res, next) => {
         res.status(201).send(data);
       }
     })
-    .sort({ createdAt: -1 });
+    .sort({ createdAt: -1 })
+    .limit(2)
+    .select("-image");
 };
 
 module.exports.supplier_post = (req, res, next) => {
-  console.log(req.body.image);
   const obj = {
     name: req.body.name,
     image: {
-      data: fs.readFileSync(path.join(__dirname + "/uploads/" + "coba")),
+      data: fs.readFileSync(
+        path.join(process.cwd() + "/uploads/" + req.file.filename)
+      ),
       contentType: "image/png",
+    },
+    media: {
+      defaultImage: req.file.filename,
     },
   };
   supplier.create(obj, (err, data) => {

@@ -17,16 +17,21 @@ router.get("/supplier/:id", supplierController.supplier_get_detail);
 const multer = require("multer");
 
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads");
+  destination: function (req, file, cb) {
+    let path = `/uploads`;
+    cb(null, process.cwd() + path);
   },
   filename: (req, file, cb) => {
-    cb(null, file.fieldname + "-" + Date.now());
+    cb(null, new Date().toISOString() + file.originalname);
   },
 });
 
 const upload = multer({ storage: storage });
-router.post("/supplier", upload.single("image"), supplierController.supplier_post);
+router.post(
+  "/supplier",
+  upload.single("image"),
+  supplierController.supplier_post
+);
 router.delete("/supplier/:id", supplierController.supplier_delete);
 router.put("/supplier/:id", supplierController.supplier_put);
 
