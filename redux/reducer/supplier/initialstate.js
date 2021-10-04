@@ -1,9 +1,15 @@
 export const initialstate = {
-  medicine: [],
-  medicineForm: [
+  supplier: [],
+  supplierForm: [
     {
       name: "Nama",
       value: "",
+      error: "",
+    },
+    {
+      name: "Image",
+      value: "",
+      url: "",
       error: "",
     },
   ],

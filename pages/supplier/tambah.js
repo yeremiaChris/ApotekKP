@@ -1,40 +1,130 @@
-import React, { useState } from "react";
-import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  onBlur,
+  onChange,
+  onChangeImage,
+  submitError,
+  submitSupplierPost,
+} from "../../redux/actions/supplier/supplierActions";
+import ErrorMessage from "../../components/form/ErrorMessage";
+import { useRef } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
-export default function tambah() {
-  const [state, setstate] = useState({
-    name: "",
-    image: "",
-  });
-  const kirim = () => {
-    const formData = new FormData();
-    formData.append("name", state.name);
-    formData.append("image", state.image);
-    const config = {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    };
-    axios
-      .post("http://localhost:4000/api/supplier", config, formData, config)
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+export default function Tambah() {
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const imageRef = useRef();
+  // data
+  const forms = useSelector((state) => state.supplier.supplierForm);
+  const disabled = useSelector((state) => state.sistem.disabled);
+
+  // methods
+  const handleBlur = (name) => {
+    console.log("test");
+    dispatch(onBlur(name));
   };
+
+  const handleChange = (data) => {
+    if (data.name === "Nama") {
+      dispatch(onChange(data));
+    } else {
+      dispatch(onChangeImage(data));
+    }
+  };
+
+  const handleClickImage = () => {
+    imageRef.current.click();
+  };
+
+  const submit = () => {
+    const error = forms.some((el) => !el.value);
+    if (error) dispatch(submitError());
+    if (!error) dispatch(submitSupplierPost(router));
+  };
+
   return (
-    <div>
-      <input type="text" onChange={(e) => setstate({ ...state, name: e.target.value })} />
-      <input
-        type="file"
-        onChange={(e) => {
-          setstate({ ...state, image: e.target.files[0] });
-          console.log(e.target.files[0]);
-        }}
-      />
-      <button onClick={kirim}>Kirim</button>
+    <div className="py-2 pl-4">
+      <h1 className="text-xl">Tambah Supplier</h1>
+      <div className="bg-white grid gap-4 rounded shadow mt-2 px-4 py-4">
+        <div className="relative">
+          <label className="block text-sm text-gray-700 ">Nama</label>
+          <input
+            value={forms[0].value}
+            onBlur={(e) => (!e.target.value ? handleBlur(forms[0].name) : null)}
+            onChange={(e) => {
+              handleChange({ name: "Nama", value: e.target.value });
+            }}
+            type="text"
+            placeholder="Nama..."
+            className="
+          focus:ring-0 focus:border-0
+          block
+          w-full
+          border-dark-navy
+          focus:border-dark-navy
+          placeholder-dark-navy
+          font-normal
+          border-0 border-b
+          text-sm
+          px-0
+        "
+          />
+          <ErrorMessage message={forms[0].error} />
+        </div>
+
+        {/* box image */}
+        <div>
+          <label className="block text-sm text-gray-700 mb-3">
+            Upload image
+          </label>
+          <div
+            onClick={handleClickImage}
+            style={{
+              backgroundImage: `url(${forms[1].url})`,
+              height: 200,
+              width: 200,
+            }}
+            className={`grid cursor-pointer justify-center bg-cover items-center rounded bg-white ${
+              !forms[1].url ? "border-2 border-dashed" : ""
+            }`}
+          >
+            {!forms[1].url && <p className="text-sm cursor-pointer">Upload</p>}
+            <input
+              ref={imageRef}
+              type="file"
+              className="hidden"
+              onChange={(e) => {
+                handleChange({
+                  name: "Image",
+                  value: e.target.files[0],
+                  url: URL.createObjectURL(e.target.files[0]),
+                });
+              }}
+            />
+          </div>
+          <ErrorMessage message={forms[1].error} />
+        </div>
+
+        <div className="flex gap-3 justify-end">
+          <Link href="/supplier">
+            <a
+              type="button"
+              className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-black border-indigo-700 hover:text-white hover:bg-indigo-700  focus:ring-indigo-500"
+            >
+              Cancel
+            </a>
+          </Link>
+          <button
+            disabled={disabled}
+            onClick={submit}
+            className="px-6 py-2 bg-indigo-700 text-white rounded"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

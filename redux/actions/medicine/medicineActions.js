@@ -1,5 +1,17 @@
 //Action Types
-import { DISABLED_TRUE, EMPTY_FORM, SUBMIT_MEDICINE_PUT, GET_MEDICINE_DETAIL, DISABLED_FALSE, GET_MEDICINE, DELETE_MEDICINE, ON_BLUR_MEDICINE, ON_CHANGE_MEDICINE, SUBMIT_ERROR, SUBMIT_MEDICINE_POST } from "../../type";
+import {
+  DISABLED_TRUE,
+  EMPTY_FORM,
+  SUBMIT_MEDICINE_PUT,
+  GET_MEDICINE_DETAIL,
+  DISABLED_FALSE,
+  GET_MEDICINE,
+  DELETE_MEDICINE,
+  ON_BLUR_MEDICINE,
+  ON_CHANGE_MEDICINE,
+  SUBMIT_ERROR,
+  SUBMIT_MEDICINE_POST,
+} from "../../type";
 import axios from "../../../axios";
 // medicine
 export function getData() {
@@ -112,7 +124,6 @@ export function submitMedicinePost(router) {
     dispatch({
       type: DISABLED_TRUE,
     });
-    console.log(dataPost);
     try {
       const data = await axios.post("/medicine", dataPost);
       console.log(data.data);

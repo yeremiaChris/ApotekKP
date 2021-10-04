@@ -1,6 +1,12 @@
 import Link from "next/link";
 import { useSelector } from "react-redux";
-import { onBlur, onChange, emptyForm, submitError, submitMedicinePost } from "../redux/actions/medicine/medicineActions";
+import {
+  onBlur,
+  onChange,
+  emptyForm,
+  submitError,
+  submitMedicinePost,
+} from "../redux/actions/medicine/medicineActions";
 import { useDispatch } from "react-redux";
 import ErrorMessage from "../components/form/ErrorMessage";
 import { useRouter } from "next/router";
@@ -39,10 +45,14 @@ export default function Tambah() {
         <div className=" grid grid-cols-2 gap-4">
           {/* nama */}
           <div className="w-full">
-            <label className="block text-sm text-gray-700 ">{forms[0].name}</label>
+            <label className="block text-sm text-gray-700 ">
+              {forms[0].name}
+            </label>
             <div className="relative">
               <input
-                onBlur={(e) => (!e.target.value ? handleBlur(forms[0].name) : null)}
+                onBlur={(e) =>
+                  !e.target.value ? handleBlur(forms[0].name) : null
+                }
                 value={forms[0].value}
                 onChange={(e) => {
                   handleChange({ name: forms[0].name, value: e.target.value });
@@ -69,7 +79,10 @@ export default function Tambah() {
 
           {/* jenis */}
           <div>
-            <label htmlFor="location" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="location"
+              className="block text-sm font-medium text-gray-700"
+            >
               {forms[1].name}
             </label>
             <select
@@ -100,7 +113,10 @@ export default function Tambah() {
 
           {/* satuan */}
           <div>
-            <label htmlFor="location" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="location"
+              className="block text-sm font-medium text-gray-700"
+            >
               {forms[2].name}
             </label>
             <select
@@ -131,7 +147,10 @@ export default function Tambah() {
 
           {/* harga */}
           <div>
-            <label htmlFor="price" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="price"
+              className="block text-sm font-medium text-gray-700"
+            >
               {forms[3].name}
             </label>
             <div className="mt-1 relative rounded-md shadow-sm">
@@ -139,7 +158,9 @@ export default function Tambah() {
                 <span className="text-gray-500 sm:text-sm">Rp</span>
               </div>
               <input
-                onBlur={(e) => (!e.target.value ? handleBlur(forms[3].name) : null)}
+                onBlur={(e) =>
+                  !e.target.value ? handleBlur(forms[3].name) : null
+                }
                 onChange={(e) => {
                   handleChange({ name: forms[3].name, value: e.target.value });
                 }}
@@ -161,13 +182,21 @@ export default function Tambah() {
           </div>
         </div>
         <div className="flex mt-8 justify-end gap-5">
-          {/* submit */}
           <Link href="/">
-            <a type="button" className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-black border-indigo-700 hover:text-white hover:bg-indigo-700  focus:ring-indigo-500">
+            <a
+              type="button"
+              className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-black border-indigo-700 hover:text-white hover:bg-indigo-700  focus:ring-indigo-500"
+            >
               Cancel
             </a>
           </Link>
-          <button disabled={disabled} onClick={submit} id="btn-submit" type="button" className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500">
+          <button
+            disabled={disabled}
+            onClick={submit}
+            id="btn-submit"
+            type="button"
+            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500"
+          >
             Submit
           </button>
         </div>
