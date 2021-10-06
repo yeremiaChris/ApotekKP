@@ -40,9 +40,20 @@ module.exports.supplier_post = (req, res, next) => {
 };
 
 module.exports.supplier_put = (req, res, next) => {
-  const { body } = req;
+  const obj = {
+    name: req.body.name,
+    image: {
+      data: fs.readFileSync(
+        path.join(process.cwd() + "/uploads/" + req.file.filename)
+      ),
+      contentType: "image/png",
+    },
+    media: {
+      defaultImage: req.file.filename,
+    },
+  };
   const { id } = req.params;
-  supplier.findByIdAndUpdate(id, body, { new: true }, (err, data) => {
+  supplier.findByIdAndUpdate(id, obj, { new: true }, (err, data) => {
     if (err) {
       res.status(400).send(err);
       next();

@@ -1,5 +1,15 @@
 import { initialstate } from "./initialstate";
-import { GET_MEDICINE, EMPTY_FORM, SUBMIT_MEDICINE_PUT, GET_MEDICINE_DETAIL, DELETE_MEDICINE, ON_BLUR_MEDICINE, ON_CHANGE_MEDICINE, SUBMIT_ERROR, SUBMIT_MEDICINE_POST } from "../../type";
+import {
+  GET_MEDICINE,
+  EMPTY_FORM,
+  SUBMIT_MEDICINE_PUT,
+  GET_MEDICINE_DETAIL,
+  DELETE_MEDICINE,
+  ON_BLUR_MEDICINE,
+  ON_CHANGE_MEDICINE,
+  SUBMIT_ERROR,
+  SUBMIT_MEDICINE_POST,
+} from "../../type";
 const medicineReducer = (state = initialstate, action) => {
   switch (action.type) {
     case GET_MEDICINE:
@@ -46,7 +56,9 @@ const medicineReducer = (state = initialstate, action) => {
             item.name === action.payload
               ? {
                   ...item,
-                  error: `${item.name} field harus di isi ` + `${item.name === "Price" ? "dan harus angka" : ""}`,
+                  error:
+                    `${item.name} field harus di isi ` +
+                    `${item.name === "Price" ? "dan harus angka" : ""}`,
                 }
               : item
           ),
@@ -55,7 +67,13 @@ const medicineReducer = (state = initialstate, action) => {
     case ON_CHANGE_MEDICINE:
       return {
         ...state,
-        medicineForm: [...state.medicineForm.map((item) => (item.name === action.payload.name ? { ...item, error: "", value: action.payload.value } : item))],
+        medicineForm: [
+          ...state.medicineForm.map((item) =>
+            item.name === action.payload.name
+              ? { ...item, error: "", value: action.payload.value }
+              : item
+          ),
+        ],
       };
     case SUBMIT_ERROR:
       return {
@@ -65,7 +83,9 @@ const medicineReducer = (state = initialstate, action) => {
             !item.value
               ? {
                   ...item,
-                  error: `${item.name} field harus di isi` + `${item.name === "Price" ? "dan harus angka" : ""}`,
+                  error:
+                    `${item.name} field harus di isi` +
+                    `${item.name === "Price" ? "dan harus angka" : ""}`,
                 }
               : item
           ),
@@ -79,7 +99,11 @@ const medicineReducer = (state = initialstate, action) => {
     case SUBMIT_MEDICINE_PUT:
       return {
         ...state,
-        medicine: [...state.medicine.map((item) => (item._id === action.payload._id ? { ...item, name: action.payload.name, type: action.payload.type, unit: action.payload.unit, price: action.payload.price } : item))],
+        medicine: [
+          ...state.medicine.map((item) =>
+            item._id === action.payload._id ? action.payload : item
+          ),
+        ],
       };
 
     case DELETE_MEDICINE:

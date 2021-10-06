@@ -4,23 +4,24 @@ import {
   onChange,
   onChangeImage,
   submitError,
-  submitSupplierPost,
-  emptyForm,
-} from "../../redux/actions/supplier/supplierActions";
-import ErrorMessage from "../../components/form/ErrorMessage";
+  submitSupplierPut,
+  getDataDetail,
+} from "../../../redux/actions/supplier/supplierActions";
+import ErrorMessage from "../../../components/form/ErrorMessage";
 import { useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-export default function Tambah() {
+export default function Edit() {
   const dispatch = useDispatch();
   const router = useRouter();
   useEffect(() => {
-    dispatch(emptyForm());
+    dispatch(getDataDetail(router.query.id));
   }, []);
 
   const imageRef = useRef();
+
   // data
   const forms = useSelector((state) => state.supplier.supplierForm);
   const disabled = useSelector((state) => state.sistem.disabled);
@@ -46,12 +47,12 @@ export default function Tambah() {
   const submit = () => {
     const error = forms.some((el) => !el.value);
     if (error) dispatch(submitError());
-    if (!error) dispatch(submitSupplierPost(router));
+    if (!error) dispatch(submitSupplierPut(router));
   };
 
   return (
     <div className="py-2 pl-4">
-      <h1 className="text-xl">Tambah Supplier</h1>
+      <h1 className="text-xl">Edit Supplier</h1>
       <div className="bg-white grid gap-4 rounded shadow mt-2 px-4 py-4">
         <div className="relative">
           <label className="block text-sm text-gray-700 ">Nama</label>

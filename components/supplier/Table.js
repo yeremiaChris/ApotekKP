@@ -36,15 +36,24 @@ export default function Table(props) {
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                           {item.name}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                          {item.media.defaultImage}
+                        <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                          <div
+                            className="bg-center bg-cover h-28 w-28"
+                            style={{
+                              backgroundImage: `url('${
+                                process.env.baseApiUrl +
+                                "uploads/" +
+                                item.media.defaultImage
+                              }')`,
+                            }}
+                          ></div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                           {item.createdAt}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex justify-end gap-2">
-                          <Link href={`/edit/${item._id}`}>
-                            <a className="text-indigo-600 hover:text-indigo-900">
+                        <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                          <Link href={`/supplier/edit/${item._id}`}>
+                            <a className="text-indigo-600 mr-3  hover:text-indigo-900">
                               Edit
                             </a>
                           </Link>

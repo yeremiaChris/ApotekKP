@@ -13,6 +13,7 @@ router.put("/medicine/:id", medicineController.medicine_put);
 // supplier api
 router.get("/supplier", supplierController.supplier_get);
 router.get("/supplier/:id", supplierController.supplier_get_detail);
+
 // uploading files
 const multer = require("multer");
 
@@ -33,6 +34,11 @@ router.post(
   supplierController.supplier_post
 );
 router.delete("/supplier/:id", supplierController.supplier_delete);
-router.put("/supplier/:id", supplierController.supplier_put);
+router.put(
+  "/supplier/:id",
+  upload.single("image"),
+  supplierController.supplier_put
+);
+router.get("/supplier/:id", supplierController.supplier_get_detail);
 
 module.exports = router;

@@ -6,6 +6,9 @@ import {
   SUBMIT_ERROR_SUPPLIER,
   SUBMIT_SUPPLIER_POST,
   GET_SUPPLIER,
+  GET_SUPPLIER_DETAIL,
+  EMPTY_FORM_SUPPLIER,
+  SUBMIT_SUPPLIER_PUT,
 } from "../../type";
 const supplierReducer = (state = initialstate, action) => {
   switch (action.type) {
@@ -13,6 +16,33 @@ const supplierReducer = (state = initialstate, action) => {
       return {
         ...state,
         supplier: action.payload,
+      };
+    case EMPTY_FORM_SUPPLIER:
+      return {
+        ...state,
+        supplierForm: [
+          {
+            name: "Nama",
+            value: "",
+            error: "",
+          },
+          {
+            name: "Image",
+            value: "",
+            url: "",
+            error: "",
+          },
+        ],
+      };
+    case SUBMIT_SUPPLIER_PUT:
+      console.log(action.payload);
+      return {
+        ...state,
+        supplier: [
+          ...state.supplierForm.map((item) =>
+            item._id === action.payload._id ? action.payload : item
+          ),
+        ],
       };
     case ON_BLUR_SUPPLIER:
       return {
@@ -74,6 +104,11 @@ const supplierReducer = (state = initialstate, action) => {
               : item
           ),
         ],
+      };
+    case GET_SUPPLIER_DETAIL:
+      return {
+        ...state,
+        supplierForm: action.data,
       };
     default:
       return { ...state };
