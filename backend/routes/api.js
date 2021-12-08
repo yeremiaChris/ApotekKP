@@ -37,7 +37,7 @@ router.delete("/supplier/:id", supplierController.supplier_delete);
 router.put(
   "/supplier/:id",
   upload.single("image"),
-  supplierController.supplier_put
+  supplierController.supplier_put 
 );
 router.get("/supplier/:id", supplierController.supplier_get_detail);
 

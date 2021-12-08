@@ -21,9 +21,7 @@ module.exports.supplier_post = (req, res, next) => {
   const obj = {
     name: req.body.name,
     image: {
-      data: fs.readFileSync(
-        path.join(process.cwd() + "/uploads/" + req.file.filename)
-      ),
+      data: fs.readFileSync(path.join(process.cwd() + "/uploads/" + req.file.filename)),
       contentType: "image/png",
     },
     media: {
@@ -43,17 +41,18 @@ module.exports.supplier_put = (req, res, next) => {
   const obj = {
     name: req.body.name,
     image: {
-      data: fs.readFileSync(
-        path.join(process.cwd() + "/uploads/" + req.file.filename)
-      ),
+      data: !req.file ? "" : fs.readFileSync(path.join(process.cwd() + "/uploads/" + req.file.filename)),
       contentType: "image/png",
     },
     media: {
-      defaultImage: req.file.filename,
+      defaultImage: !req.file ? "" : req.file.filename,
     },
   };
+  const obj2 = {
+    name: req.body.name,
+  };
   const { id } = req.params;
-  supplier.findByIdAndUpdate(id, obj, { new: true }, (err, data) => {
+  supplier.findByIdAndUpdate(id, !req.file ? obj2 : obj, { new: true }, (err, data) => {
     if (err) {
       res.status(400).send(err);
       next();
