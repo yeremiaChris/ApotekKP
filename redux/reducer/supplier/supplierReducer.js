@@ -1,15 +1,5 @@
 import { initialstate } from "./initialstate";
-import {
-  ON_BLUR_SUPPLIER,
-  ON_CHANGE_SUPPLIER,
-  ON_CHANGE_SUPPLIER_IMAGE,
-  SUBMIT_ERROR_SUPPLIER,
-  SUBMIT_SUPPLIER_POST,
-  GET_SUPPLIER,
-  GET_SUPPLIER_DETAIL,
-  EMPTY_FORM_SUPPLIER,
-  SUBMIT_SUPPLIER_PUT,
-} from "../../type";
+import { ON_BLUR_SUPPLIER, ON_CHANGE_SUPPLIER, ON_CHANGE_SUPPLIER_IMAGE, SUBMIT_ERROR_SUPPLIER, SUBMIT_SUPPLIER_POST, GET_SUPPLIER, GET_SUPPLIER_DETAIL, EMPTY_FORM_SUPPLIER, SUBMIT_SUPPLIER_PUT } from "../../type";
 const supplierReducer = (state = initialstate, action) => {
   switch (action.type) {
     case GET_SUPPLIER:
@@ -38,11 +28,7 @@ const supplierReducer = (state = initialstate, action) => {
       console.log(action.payload);
       return {
         ...state,
-        supplier: [
-          ...state.supplierForm.map((item) =>
-            item._id === action.payload._id ? action.payload : item
-          ),
-        ],
+        supplier: [...state.supplier.map((item) => (item._id === action.payload._id ? action.payload : item))],
       };
     case ON_BLUR_SUPPLIER:
       return {
@@ -92,18 +78,12 @@ const supplierReducer = (state = initialstate, action) => {
     case SUBMIT_SUPPLIER_POST:
       return {
         ...state,
-        supplier: [action.payload, state.supplier],
+        supplier: [action.payload, ...state.supplier],
       };
     case SUBMIT_ERROR_SUPPLIER:
       return {
         ...state,
-        supplierForm: [
-          ...state.supplierForm.map((item) =>
-            item.value.length === 0
-              ? { ...item, error: `${item.name} field is required` }
-              : item
-          ),
-        ],
+        supplierForm: [...state.supplierForm.map((item) => (item.value.length === 0 ? { ...item, error: `${item.name} field is required` } : item))],
       };
     case GET_SUPPLIER_DETAIL:
       return {

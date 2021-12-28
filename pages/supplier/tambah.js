@@ -1,12 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import {
-  onBlur,
-  onChange,
-  onChangeImage,
-  submitError,
-  submitSupplierPost,
-  emptyForm,
-} from "../../redux/actions/supplier/supplierActions";
+import { onBlur, onChange, onChangeImage, submitError, submitSupplierPost, emptyForm } from "../../redux/actions/supplier/supplierActions";
 import ErrorMessage from "../../components/form/ErrorMessage";
 import { useRef } from "react";
 import Link from "next/link";
@@ -27,7 +20,6 @@ export default function Tambah() {
 
   // methods
   const handleBlur = (name) => {
-    console.log("test");
     dispatch(onBlur(name));
   };
 
@@ -81,9 +73,7 @@ export default function Tambah() {
 
         {/* box image */}
         <div>
-          <label className="block text-sm text-gray-700 mb-3">
-            Upload image
-          </label>
+          <label className="block text-sm text-gray-700 mb-3">Upload image</label>
           <div
             onClick={handleClickImage}
             style={{
@@ -91,9 +81,7 @@ export default function Tambah() {
               height: 200,
               width: 200,
             }}
-            className={`grid cursor-pointer justify-center bg-cover items-center rounded bg-white ${
-              !forms[1].url ? "border-2 border-dashed" : ""
-            }`}
+            className={`grid cursor-pointer justify-center bg-cover items-center rounded bg-white ${!forms[1].url ? "border-2 border-dashed" : ""}`}
           >
             {!forms[1].url && <p className="text-sm cursor-pointer">Upload</p>}
             <input
@@ -114,18 +102,11 @@ export default function Tambah() {
 
         <div className="flex gap-3 justify-end">
           <Link href="/supplier">
-            <a
-              type="button"
-              className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-black border-indigo-700 hover:text-white hover:bg-indigo-700  focus:ring-indigo-500"
-            >
+            <a type="button" className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-black border-indigo-700 hover:text-white hover:bg-indigo-700  focus:ring-indigo-500">
               Cancel
             </a>
           </Link>
-          <button
-            disabled={disabled}
-            onClick={submit}
-            className="px-6 py-2 bg-indigo-700 text-white rounded"
-          >
+          <button disabled={disabled} onClick={submit} className="px-6 py-2 bg-indigo-700 text-white rounded">
             Submit
           </button>
         </div>

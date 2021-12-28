@@ -1,17 +1,5 @@
 //Action Types
-import {
-  DISABLED_TRUE,
-  EMPTY_FORM,
-  SUBMIT_MEDICINE_PUT,
-  GET_MEDICINE_DETAIL,
-  DISABLED_FALSE,
-  GET_MEDICINE,
-  DELETE_MEDICINE,
-  ON_BLUR_MEDICINE,
-  ON_CHANGE_MEDICINE,
-  SUBMIT_ERROR,
-  SUBMIT_MEDICINE_POST,
-} from "../../type";
+import { DISABLED_TRUE, EMPTY_FORM, SUBMIT_MEDICINE_PUT, GET_MEDICINE_DETAIL, DISABLED_FALSE, GET_MEDICINE, DELETE_MEDICINE, ON_BLUR_MEDICINE, ON_CHANGE_MEDICINE, SUBMIT_ERROR, SUBMIT_MEDICINE_POST } from "../../type";
 import axios from "../../../axios";
 // medicine
 export function getData() {
@@ -23,7 +11,7 @@ export function getData() {
         payload: data.data,
       });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 }
@@ -71,7 +59,6 @@ export function getDataDetail(id) {
 }
 
 export function deleteDataMedicine(id) {
-  console.log(id);
   return async (dispatch) => {
     try {
       await axios.delete(`/medicine/${id}`);
@@ -80,7 +67,7 @@ export function deleteDataMedicine(id) {
         id: id,
       });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 }
@@ -126,14 +113,13 @@ export function submitMedicinePost(router) {
     });
     try {
       const data = await axios.post("/medicine", dataPost);
-      console.log(data.data);
       router.push("/");
       dispatch({
         type: SUBMIT_MEDICINE_POST,
         payload: data.data,
       });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
     dispatch({
       type: DISABLED_FALSE,
@@ -155,14 +141,13 @@ export function submitMedicinePut(router) {
     });
     try {
       const data = await axios.put(`/medicine/${router.query.id}`, dataPost);
-      console.log(data.data);
       router.push("/");
       dispatch({
         type: SUBMIT_MEDICINE_PUT,
         payload: data.data,
       });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
     dispatch({
       type: DISABLED_FALSE,

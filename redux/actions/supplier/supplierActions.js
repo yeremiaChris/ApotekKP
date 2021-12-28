@@ -1,31 +1,17 @@
 //Action Types
-import {
-  GET_SUPPLIER,
-  ON_BLUR_SUPPLIER,
-  ON_CHANGE_SUPPLIER,
-  SUBMIT_ERROR_SUPPLIER,
-  SUBMIT_SUPPLIER_POST,
-  ON_CHANGE_SUPPLIER_IMAGE,
-  DISABLED_TRUE,
-  DISABLED_FALSE,
-  GET_SUPPLIER_DETAIL,
-  EMPTY_FORM_SUPPLIER,
-  SUBMIT_SUPPLIER_PUT,
-} from "../../type";
+import { GET_SUPPLIER, ON_BLUR_SUPPLIER, ON_CHANGE_SUPPLIER, SUBMIT_ERROR_SUPPLIER, SUBMIT_SUPPLIER_POST, ON_CHANGE_SUPPLIER_IMAGE, DISABLED_TRUE, DISABLED_FALSE, GET_SUPPLIER_DETAIL, EMPTY_FORM_SUPPLIER, SUBMIT_SUPPLIER_PUT } from "../../type";
 import axios from "../../../axios";
 // medicine
 export function getData() {
-  console.log("tst");
   return async (dispatch) => {
     try {
       const data = await axios.get("/supplier");
-      console.log(data);
       dispatch({
         type: GET_SUPPLIER,
         payload: data.data,
       });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 }
@@ -66,14 +52,13 @@ export function submitSupplierPost(router) {
     });
     try {
       const data = await axios.post("/supplier", formData, config);
-      console.log(data);
       router.push("/supplier");
       dispatch({
         type: SUBMIT_SUPPLIER_POST,
         payload: data.data,
       });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
     dispatch({
       type: DISABLED_FALSE,
@@ -91,7 +76,6 @@ export function getDataDetail(id) {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(`/supplier/${id}`);
-      console.log(data);
       const form = [
         {
           name: "Nama",
@@ -135,11 +119,7 @@ export function submitSupplierPut(router) {
       type: DISABLED_TRUE,
     });
     try {
-      const data = await axios.put(
-        `/supplier/${router.query.id}`,
-        formData,
-        config
-      );
+      const data = await axios.put(`/supplier/${router.query.id}`, formData, config);
       router.push("/supplier");
       dispatch({
         type: SUBMIT_SUPPLIER_PUT,

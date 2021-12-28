@@ -10,7 +10,7 @@ export const initialstate = {
       name: "Image",
       value: "",
       url: "",
-      error: "",
+      error: "", 
     },
   ],
 };
